@@ -1,6 +1,6 @@
 # Step 1: Build React App
 
-FROM node:22-alpine3.20 AS builder
+FROM node:22-alpine3.20 AS build
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ RUN npm run build
 
 # Step 2: Server With Nginx
 
-FROM nginx:1.27.3-alpine
+FROM nginx:1.27.3-bookworm
 # nginx 폴더 내로 이동
 WORKDIR /usr/share/nginx/html
 # 파일 제거
