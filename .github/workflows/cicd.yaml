@@ -1,0 +1,30 @@
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} - p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker Image
+        run: docker build -t parkyoon97/webprolist-frontend .
+      - name: Publish Image to Docker Hub
+        run: docker push parkyoon97/webprolist-frontend:latest
+
+  deploy:
+    needs: build
+    runs-on: aws-ec2
+    steps:
+      - name: Pull Image from Docker Hub
+        run: docker pull parkyoon97/webprolist-frontend:latest
+      - name: Delete Old Container
+        run: docker rm -f reactContainer
+      - name: Run Docker Container
+        run: docker run -d -p 3000:80 --name reactContainer parkyoon97/webprolist-frontend
