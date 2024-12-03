@@ -15,13 +15,20 @@ RUN npm run build
 # Step 2: Server With Nginx
 
 FROM nginx:1.27.3-bookworm
-# nginx 폴더 내로 이동
+
+# nginx 기본 설정 파일 제거
+RUN rm /etc/nginx/conf.d/default.conf
+
+# SPA를 위해 nginx 설정 파일 복사
+COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
+
 WORKDIR /usr/share/nginx/html
-# 파일 제거
+
 RUN rm -rf *
-# build stage에서 /app/dist 폴더 내의 파일 복사
+
 COPY --from=build /app/dist .
 
 EXPOSE 80
+
 # nginx foreground 실행
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
