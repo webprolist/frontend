@@ -9,7 +9,7 @@ import My from './pages/My.tsx';
 import ProductList from './pages/ProductList.tsx';
 import ProductDetail from './pages/ProductDetail.tsx';
 import CreateList from './pages/CreateList.tsx';
-
+// import SignIn from './pages/SignIn.tsx';
 
 const router = createBrowserRouter([
   {
@@ -36,7 +36,11 @@ const router = createBrowserRouter([
       {
         path: '/create-list',
         element: <CreateList />
-      }
+      },
+      // {
+      //   path: '/signin',
+      //   element: <SignIn />
+      // }
     ],
   },
 ]);
