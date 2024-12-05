@@ -16,8 +16,11 @@ import ModeToggle from "./header/mode-toggle"
 export default function Navbar() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [authorized, setAuthorized] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+
 
   return (
     <nav className="sticky z-[10] h-14 inset-x-0 top-0 w-full border-b border-gray-20 backdrop-blur-lg transition-all">
@@ -29,14 +32,30 @@ export default function Navbar() {
           <SearchBar />
           <Link to={'/create-list'}>
             <Button>
-              <p>MyList</p>
+              <p>Add List</p>
               <SquarePen />
             </Button>
           </Link>
           <ModeToggle />
-          <Link to={'/@user'}>
-            <UserIcon />
-          </Link>        </div>
+          {/* {authorized ? (
+            <Link to={'/@user'}>
+              <UserIcon />
+            </Link>
+          ) : (
+            <div className="flex gap-4">
+              <Link to={'/signin'}>
+                <Button variant={"outline"}>
+                  <p>Sign In</p>
+                </Button>
+              </Link>
+              <Link to={'/signup'}>
+                <Button variant={"default"}>
+                  <p>Sign Up</p>
+                </Button>
+              </Link>
+            </div>
+          )} */}
+        </div>
         {/* 모바일 전용 - Logo, Menu Icon, UserIcon */}
         <div className="flex items-center md:hidden w-full justify-between">
           <Logo />
@@ -67,7 +86,7 @@ export default function Navbar() {
           {/* <SearchBar /> */}
           <Link to={'/create-list'}>
             <button onClick={() => setIsMenuOpen(false)}>
-              <p>MyList</p>
+              <p>Add List</p>
             </button>
           </Link>
           <Link to={'/light-dark'}>
