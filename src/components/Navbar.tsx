@@ -14,7 +14,7 @@ import UserIcon from "./header/UserIcon"
 import ModeToggle from "./header/mode-toggle"
 
 export default function Navbar() {
-
+  const [authorized, setAuthorized] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [authorized, setAuthorized] = useState(false);
 
@@ -37,7 +37,7 @@ export default function Navbar() {
             </Button>
           </Link>
           <ModeToggle />
-          {/* {authorized ? (
+          {authorized ? (
             <Link to={'/@user'}>
               <UserIcon />
             </Link>
@@ -54,7 +54,7 @@ export default function Navbar() {
                 </Button>
               </Link>
             </div>
-          )} */}
+          )}
         </div>
         {/* 모바일 전용 - Logo, Menu Icon, UserIcon */}
         <div className="flex items-center md:hidden w-full justify-between">
